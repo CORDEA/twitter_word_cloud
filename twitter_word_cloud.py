@@ -23,7 +23,11 @@ def main():
     lower_query = query.lower()
     without_num = [w for w in words if not w.isdigit() and not w.lower() == lower_query]
 
-    cloud = WordCloud().generate(" ".join(without_num))
+    cloud = WordCloud(
+        background_color="white",
+        contour_width=5,
+        contour_color="royalblue"
+    ).generate(" ".join(without_num))
 
     plt.figure()
     plt.imshow(cloud, interpolation="bilinear")
