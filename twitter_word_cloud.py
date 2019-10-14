@@ -20,7 +20,8 @@ def main():
     )
     result = client.search(query, since, until)
     words = sum([nagisa.extract(r.text, extract_postags=["名詞"]).words for r in result], [])
-    without_num = [w for w in words if not w.isdigit()]
+    lower_query = query.lower()
+    without_num = [w for w in words if not w.isdigit() and not w.lower() == lower_query]
 
     cloud = WordCloud().generate(" ".join(without_num))
 
