@@ -22,4 +22,4 @@ class TwitterClient:
             else:
                 all_result.update(result)
                 min_id = new_min_id
-        return all_result
+        return [t for t in all_result if t.retweeted_status is None]
