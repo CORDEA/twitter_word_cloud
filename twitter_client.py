@@ -11,4 +11,15 @@ class TwitterClient:
         )
 
     def search(self, term, since, until):
-        return self.api.GetSearch(term=term, until=until, since=since)
+        all_result = set()
+        min_id = None
+        while True:
+            result = self.api.GetSearch(term=term, until=until, since=since, count=100, result_type="recent",
+                                        max_id=min_id)
+            new_min_id = min([r.id for r in result])
+            if min_id == new_min_id:
+                break
+            else:
+                all_result.update(result)
+                min_id = new_min_id
+        return all_result
