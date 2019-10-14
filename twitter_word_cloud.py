@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import nagisa
+
 import settings
 from twitter_client import TwitterClient
 
@@ -12,8 +14,8 @@ def main():
         access_token_secret=settings.ACCESS_TOKEN_SECRET
     )
     result = client.search("", datetime.now(), datetime.now())
-    texts = [m.text for m in result]
-    print(texts)
+    words = sum([nagisa.extract(r, extract_postags=["名詞"]).words for r in result], [])
+    without_num = [w for w in words if not w.isdigit()]
 
 
 if __name__ == "__main__":
