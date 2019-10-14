@@ -1,5 +1,3 @@
-import datetime
-
 import twitter
 
 
@@ -12,5 +10,5 @@ class TwitterClient:
             access_token_secret=access_token_secret
         )
 
-    def search(self, term, since: datetime.datetime, until: datetime.datetime):
-        return self.api.GetSearch(term=term, until=until.strftime("%Y-%m-%d"), since=since.strftime("%Y-%m-%d"))
+    def search(self, term, since, until):
+        return self.api.GetSearch(term=term, until=until, since=since)
